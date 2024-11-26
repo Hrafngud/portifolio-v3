@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { ExpandableCard } from "@/components/ui/expandable-card";
 import { useLanguage } from "@/context/language-context";
 import { dictionary } from "@/lib/dictionary";
-import { ptBR } from 'date-fns/locale';
+import { ptBR } from "date-fns/locale";
 import { Article } from "@/components/types";
 
 export function Articles({ articles }: { articles: Article[] }) {
@@ -34,14 +34,14 @@ export function Articles({ articles }: { articles: Article[] }) {
                   {format(
                     new Date(article.created),
                     "MMMM d, yyyy",
-                    { locale: language === 'pt' ? ptBR : undefined }
+                    { locale: language === "pt" ? ptBR : undefined }
                   )}
                 </time>
                 <h3 className="text-2xl font-semibold">
-                  {language === 'pt' ? article.title_pt : article.title_en}
+                  {language === "pt" ? article.title_pt : article.title_en}
                 </h3>
                 <div className="prose dark:prose-invert max-w-none">
-                  {language === 'pt' ? article.content_pt : article.content_en}
+                  {language === "pt" ? article.content_pt : article.content_en}
                 </div>
               </div>
             }
@@ -51,14 +51,14 @@ export function Articles({ articles }: { articles: Article[] }) {
                 {format(
                   new Date(article.created),
                   "MMMM d, yyyy",
-                  { locale: language === 'pt' ? ptBR : undefined }
+                  { locale: language === "pt" ? ptBR : undefined }
                 )}
               </time>
               <h3 className="text-xl font-semibold mt-2 mb-4">
-                {language === 'pt' ? article.title_pt : article.title_en}
+                {language === "pt" ? article.title_pt : article.title_en}
               </h3>
               <p className="text-muted-foreground line-clamp-3">
-                {language === 'pt' ? article.content_pt : article.content_en}
+                {language === "pt" ? article.content_pt : article.content_en}
               </p>
             </div>
           </ExpandableCard>
