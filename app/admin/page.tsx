@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { pb } from "@/lib/pocketbase";
+import { createPocketBase } from "@/lib/pocketbase";
 import { LoginForm } from "@/components/admin/login-form";
 
 export default function AdminPage() {
