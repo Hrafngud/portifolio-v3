@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { pb } from "@/lib/pocketbase";
+import { createPocketBase } from "@/lib/pocketbase";
 
 const AuthContext = createContext<{
   isAuthenticated: boolean;
