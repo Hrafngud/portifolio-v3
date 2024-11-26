@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -32,8 +32,8 @@ export function Projects({ projects }: { projects: Project[] }) {
                 <div className="max-w-4xl mx-auto">
                   <div className="aspect-video relative">
                     <Image
-                      src={`https://free-foreign.pockethost.io/api/files/${project.collectionId}/${project.id}/${project.image}`}
-                      alt={language === 'pt' ? project.title_pt : project.title_en}
+                      src={`http://127.0.0.1:8090/api/files/${project.collectionId}/${project.id}/${project.image}`}
+                      alt={language === "pt" ? project.title_pt : project.title_en}
                       fill
                       className="object-cover rounded-lg"
                     />
@@ -41,10 +41,10 @@ export function Projects({ projects }: { projects: Project[] }) {
                 </div>
                 <div className="max-w-3xl mx-auto">
                   <h3 className="text-2xl font-semibold mt-6">
-                    {language === 'pt' ? project.title_pt : project.title_en}
+                    {language === "pt" ? project.title_pt : project.title_en}
                   </h3>
                   <p className="text-muted-foreground mt-4">
-                    {language === 'pt' ? project.description_pt : project.description_en}
+                    {language === "pt" ? project.description_pt : project.description_en}
                   </p>
                 </div>
               </div>
@@ -54,17 +54,17 @@ export function Projects({ projects }: { projects: Project[] }) {
               <div className="aspect-video relative">
                 <Image
                   src={`http://127.0.0.1:8090/api/files/${project.collectionId}/${project.id}/${project.image}`}
-                  alt={language === 'pt' ? project.title_pt : project.title_en}
+                  alt={language === "pt" ? project.title_pt : project.title_en}
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2">
-                  {language === 'pt' ? project.title_pt : project.title_en}
+                  {language === "pt" ? project.title_pt : project.title_en}
                 </h3>
                 <p className="text-muted-foreground line-clamp-2">
-                  {language === 'pt' ? project.description_pt : project.description_en}
+                  {language === "pt" ? project.description_pt : project.description_en}
                 </p>
               </div>
             </div>
