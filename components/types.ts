@@ -8,8 +8,11 @@ export interface Project {
   description_en: string;
 }
 
-export type Article = {
+export interface Article {
   id: string;
-  title: string;
-  // add other properties as needed
-}; 
+  created: string;
+  title_en: string;
+  title_pt: string;
+  content_en: string;
+  content_pt: string;
+} 
