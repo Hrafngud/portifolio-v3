@@ -1,24 +1,31 @@
+
 import PocketBase from 'pocketbase';
 import 'dotenv/config';
 
-export const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+export const createPocketBase = () => new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
-interface ProjectData {
-  title_en: string;
-  title_pt: string;
-  description_en: string;
-  description_pt: string;
-  image: File;
-}
+/**
+ * Initializes a PocketBase instance for SSR with cookie-based authStore management.
+ */
+export const initPocketBase = (req, res) => {
+  const pb = createPocketBase();
 
-interface ArticleData {
-  title_en: string;
-  title_pt: string;
-  content_en: string;
-  content_pt: string;
-}
+  // Load auth state from cookies
+  pb.authStore.loadFromCookie(req?.headers?.cookie || '');
 
-export const getProjects = async () => {
+  // Sync auth state back to cookies on any change
+  pb.authStore.onChange(() => {
+    if (res) {
+      res.setHeader('set-cookie', pb.authStore.exportToCookie());
+    }
+  });
+
+  return pb;
+};
+
+export const getProjects = async (req = null, res = null) => {
+  const pb = req && res ? initPocketBase(req, res) : createPocketBase();
+
   try {
     return await pb.collection('projects').getFullList({
       sort: '-created',
@@ -29,7 +36,9 @@ export const getProjects = async () => {
   }
 };
 
-export const getArticles = async () => {
+export const getArticles = async (req = null, res = null) => {
+  const pb = req && res ? initPocketBase(req, res) : createPocketBase();
+
   try {
     return await pb.collection('articles').getFullList({
       sort: '-created',
@@ -40,19 +49,27 @@ export const getArticles = async () => {
   }
 };
 
-export const createProject = async (formData: FormData) => {
+export const createProject = async (formData) => {
+  const pb = createPocketBase();
   const data = {
     title_en: formData.get('title_en'),
     title_pt: formData.get('title_pt'),
     description_en: formData.get('description_en'),
     description_pt: formData.get('description_pt'),
-    image: formData.get('image')
+    image: formData.get('image'),
   };
-  
-  return await pb.collection('projects').create(data);
+
+  try {
+    return await pb.collection('projects').create(data);
+  } catch (error) {
+    console.error('Error creating project:', error);
+    throw error;
+  }
 };
 
-export const createArticle = async (data: ArticleData) => {
+export const createArticle = async (data) => {
+  const pb = createPocketBase();
+
   try {
     return await pb.collection('articles').create(data);
   } catch (error) {
