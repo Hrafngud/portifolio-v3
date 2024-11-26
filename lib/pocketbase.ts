@@ -8,6 +8,7 @@ const baseURL = process.env.NEXT_PUBLIC_POCKETBASE_URL || 'https://free-foreign.
  * Creates a new PocketBase instance.
  * Use this for client-side and server-side interactions.
  */
+export const pb = new PocketBase(baseURL);
 export const createPocketBase = () => new PocketBase(baseURL);
 
 /**
