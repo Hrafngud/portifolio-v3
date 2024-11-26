@@ -32,7 +32,7 @@ export function Projects({ projects }: { projects: Project[] }) {
                 <div className="max-w-4xl mx-auto">
                   <div className="aspect-video relative">
                     <Image
-                      src={`http://127.0.0.1:8090/api/files/${project.collectionId}/${project.id}/${project.image}`}
+                      src={`https://free-foreign.pockethost.io/api/files/${project.collectionId}/${project.id}/${project.image}`}
                       alt={language === 'pt' ? project.title_pt : project.title_en}
                       fill
                       className="object-cover rounded-lg"
