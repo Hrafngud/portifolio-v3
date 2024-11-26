@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { createPocketBase } from "@/lib/pocketbase";
+import { pb } from "@/lib/pocketbase";
 import { Dashboard } from "@/components/admin/dashboard";
 
 export default function DashboardPage() {
