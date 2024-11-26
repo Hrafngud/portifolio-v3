@@ -2,18 +2,18 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { pb } from "@/lib/pocketbase";
 import { Dashboard } from "@/components/admin/dashboard";
+import { createPocketBase } from "@/lib/pocketbase";
 
 export default function DashboardPage() {
-  const pb = pb(); // Instantiate the PocketBase instance
+  const pb = createPocketBase(); // Creates a fresh PocketBase instance
   const router = useRouter();
 
   useEffect(() => {
-    if (!pb.authStore.isValid) { // Access the authStore via the pb instance
+    if (!pb.authStore.isValid) {
       router.push("/admin");
     }
   }, [pb, router]);
 
-  return <Dashboard />;
+  return <div>Welcome to the Dashboard</div>;
 }
