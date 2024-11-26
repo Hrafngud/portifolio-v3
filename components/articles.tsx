@@ -6,7 +6,7 @@ import { ExpandableCard } from "@/components/ui/expandable-card";
 import { useLanguage } from "@/context/language-context";
 import { dictionary } from "@/lib/dictionary";
 import { ptBR } from 'date-fns/locale';
-import { Article } from "@/types";
+import { Article } from "@/components/types";
 
 export function Articles({ articles }: { articles: Article[] }) {
   const { language } = useLanguage();
