@@ -6,7 +6,7 @@ import { pb } from "@/lib/pocketbase";
 import { Dashboard } from "@/components/admin/dashboard";
 
 export default function DashboardPage() {
-  const pb = createPocketBase(); // Instantiate the PocketBase instance
+  const pb = pb(); // Instantiate the PocketBase instance
   const router = useRouter();
 
   useEffect(() => {
