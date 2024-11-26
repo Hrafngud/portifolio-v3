@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProjectForm } from "./project-form";
 import { ArticleForm } from "./article-form";
 import { Button } from "@/components/ui/button";
-import { createPocketBase } from "@/lib/pocketbase";
+import { pb } from "@/lib/pocketbase";
 
 export function Dashboard() {
   const router = useRouter();
