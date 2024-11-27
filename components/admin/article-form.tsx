@@ -20,15 +20,16 @@ export function ArticleForm() {
 
     try {
       const formData = new FormData(e.currentTarget);
-      const articleData = {
+
+      // Explicitly define the type for articleData
+      const articleData: Omit<Article, "id" | "created"> = {
         title_en: formData.get("title_en") as string,
         title_pt: formData.get("title_pt") as string,
         content_en: formData.get("content_en") as string,
         content_pt: formData.get("content_pt") as string,
       };
 
-      // Explicitly cast articleData to match createArticle's input type
-      await createArticle(articleData); 
+      await createArticle(articleData);
       e.currentTarget.reset();
       router.refresh();
       toast.success("Article created successfully!");
