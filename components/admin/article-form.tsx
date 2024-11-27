@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
+import { Article } from "@/components/types"; // Correct import for Article type
 
 export function ArticleForm() {
   const router = useRouter();
