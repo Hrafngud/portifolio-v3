@@ -10,14 +10,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 
-// Add type for form data
-interface ArticleFormData {
-  title_en: string;
-  title_pt: string;
-  content_en: string;
-  content_pt: string;
-}
-
 export function ArticleForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -28,20 +20,20 @@ export function ArticleForm() {
 
     try {
       const formData = new FormData(e.currentTarget);
-      const articleData: ArticleFormData = {
+      const articleData = {
         title_en: formData.get("title_en") as string,
         title_pt: formData.get("title_pt") as string,
         content_en: formData.get("content_en") as string,
         content_pt: formData.get("content_pt") as string,
       };
-      
-      await createArticle(articleData);
+
+      await createArticle(articleData); // Use the updated function
       e.currentTarget.reset();
       router.refresh();
       toast.success("Article created successfully!");
     } catch (error) {
-      console.error('Error creating article:', error);
-      toast.error(error instanceof Error ? error.message : 'Failed to create article');
+      console.error("Error creating article:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to create article");
     } finally {
       setLoading(false);
     }
