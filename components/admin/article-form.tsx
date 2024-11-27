@@ -27,7 +27,8 @@ export function ArticleForm() {
         content_pt: formData.get("content_pt") as string,
       };
 
-      await createArticle(articleData); // Use the updated function
+      // Explicitly cast articleData to match createArticle's input type
+      await createArticle(articleData); 
       e.currentTarget.reset();
       router.refresh();
       toast.success("Article created successfully!");
