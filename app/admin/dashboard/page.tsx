@@ -1,44 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ProjectForm } from "./project-form";
-import { ArticleForm } from "./article-form";
-import { Button } from "@/components/ui/button";
-import { createPocketBase } from "@/lib/pocketbase"; // Use the function to create the instance
+import { createPocketBase } from "@/lib/pocketbase"; // Use the correct import for PocketBase
+import { Dashboard } from "@/components/admin/dashboard";
 
-export function Dashboard() {
+export default function DashboardPage() {
   const router = useRouter();
-  const pb = createPocketBase(); // Dynamically create the PocketBase instance
-  const [activeTab, setActiveTab] = useState("projects");
+  const pb = createPocketBase(); // Create a fresh PocketBase instance
+  const [isValid, setIsValid] = useState(pb.authStore.isValid); // Track authentication status
 
-  const handleLogout = () => {
-    pb.authStore.clear(); // Clear the authentication store
-    router.push("/admin"); // Redirect to the admin page
-  };
+  useEffect(() => {
+    if (!isValid) {
+      router.push("/admin");
+    }
+  }, [isValid, router]);
 
-  return (
-    <div className="max-w-4xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <Button variant="outline" onClick={handleLogout}>
-          Logout
-        </Button>
-      </div>
+  if (!isValid) return null; // Avoid rendering if the user isn't authenticated
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="projects">Projects</TabsTrigger>
-          <TabsTrigger value="articles">Articles</TabsTrigger>
-        </TabsList>
-        <TabsContent value="projects">
-          <ProjectForm />
-        </TabsContent>
-        <TabsContent value="articles">
-          <ArticleForm />
-        </TabsContent>
-      </Tabs>
-    </div>
-  );
+  return <Dashboard />;
 }
